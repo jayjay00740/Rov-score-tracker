@@ -1,0 +1,413 @@
+:root {
+    --bg-color: #1a1a2e; /* Dark background */
+    --text-color: #e0e0e0; /* Light grey text */
+    --accent-color: #00f0ff; /* Neon blue */
+    --secondary-accent-color: #ff007f; /* Neon pink */
+    --card-bg: #2a2a4a; /* Slightly lighter dark for cards */
+    --border-color: #00f0ff;
+    --input-bg: #3a3a5a;
+    --button-hover-bg: #00aaff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto Mono', monospace; /* Monospaced for a techy feel */
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    overflow-y: auto; /* Allow scrolling for content */
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    background-color: var(--bg-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3); /* Subtle neon glow */
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--accent-color);
+}
+
+h1 {
+    font-family: 'Orbitron', sans-serif; /* Futuristic heading font */
+    color: var(--accent-color);
+    text-shadow: 0 0 10px var(--accent-color);
+    font-size: 2.5em;
+}
+
+h2, h3 {
+    color: var(--secondary-accent-color);
+    margin-bottom: 15px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+/* Neon Button Style */
+.neon-button {
+    background-color: transparent;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+    padding: 10px 20px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.neon-button:hover {
+    color: var(--bg-color);
+    background-color: var(--accent-color);
+    box-shadow: 0 0 20px var(--accent-color), 0 0 40px var(--accent-color);
+}
+
+.neon-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+}
+
+.neon-button:hover::before {
+    left: 100%;
+}
+
+/* Team Sections */
+main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.team-section, .match-history-section {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 15px rgba(255, 0, 127, 0.2); /* Pink glow for sections */
+}
+
+.team-name {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.8em;
+    cursor: pointer;
+    margin-bottom: 15px;
+    color: var(--accent-color);
+    border-bottom: 1px dashed var(--secondary-accent-color);
+    padding-bottom: 10px;
+}
+
+.team-name:hover {
+    text-shadow: 0 0 8px var(--accent-color);
+}
+
+.score {
+    font-size: 1.2em;
+    color: var(--secondary-accent-color);
+    font-family: 'Orbitron', sans-serif;
+}
+
+.player-list ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.player-list li {
+    margin-bottom: 8px;
+    padding: 5px 0;
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+}
+
+.player-list li:last-child {
+    border-bottom: none;
+}
+
+.player-list input[type="text"] {
+    background-color: var(--input-bg);
+    border: 1px solid var(--accent-color);
+    color: var(--text-color);
+    padding: 5px 8px;
+    border-radius: 3px;
+    font-family: 'Roboto Mono', monospace;
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.player-list input[type="text"]:focus {
+    outline: none;
+    box-shadow: 0 0 5px var(--accent-color);
+}
+
+.player-list .reserve {
+    opacity: 0.7; /* Dim reserve players slightly */
+}
+
+/* Calendar Styling (Simple) */
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-bottom: 20px;
+    background-color: var(--input-bg);
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--secondary-accent-color);
+}
+
+.calendar span {
+    text-align: center;
+    padding: 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.calendar span.day-header {
+    font-weight: bold;
+    color: var(--secondary-accent-color);
+    background-color: transparent;
+    cursor: default;
+}
+
+.calendar span.day {
+    background-color: rgba(0, 240, 255, 0.1);
+}
+
+.calendar span.day:hover {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    box-shadow: 0 0 8px var(--accent-color);
+}
+
+.calendar span.day.selected {
+    background-color: var(--secondary-accent-color);
+    color: var(--bg-color);
+    box-shadow: 0 0 10px var(--secondary-accent-color);
+    border: 1px solid var(--secondary-accent-color);
+}
+
+.calendar span.empty {
+    background-color: transparent;
+    cursor: default;
+}
+
+/* Match Log */
+.match-log {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    border-radius: 5px;
+    background-color: var(--input-bg);
+}
+
+.match-entry {
+    background-color: var(--card-bg);
+    border: 1px solid var(--secondary-accent-color);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+
+.match-entry strong {
+    color: var(--accent-color);
+}
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 100; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+    backdrop-filter: blur(5px); /* Frosted glass effect */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    margin: auto;
+    padding: 30px;
+    border: 2px solid var(--accent-color);
+    width: 90%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 0 25px var(--accent-color);
+    position: relative;
+    animation: fadeInScale 0.3s ease-out;
+}
+
+.cyberpunk-card {
+    background-image: linear-gradient(45deg, #2a2a4a 0%, #1a1a2e 100%);
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.4), 0 0 40px rgba(255, 0, 127, 0.2);
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.close-button {
+    color: var(--secondary-accent-color);
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: var(--accent-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content h2 {
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 0 0 8px var(--accent-color);
+}
+
+.modal-content label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-color);
+    font-size: 1.1em;
+}
+
+.modal-content input[type="text"],
+.modal-content select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: var(--input-bg);
+    border: 1px solid var(--secondary-accent-color);
+    color: var(--text-color);
+    border-radius: 5px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1em;
+}
+
+.modal-content input[type="text"]:focus,
+.modal-content select:focus {
+    outline: none;
+    box-shadow: 0 0 8px var(--secondary-accent-color);
+}
+
+.modal-content button[type="submit"] {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.summary-button {
+    display: block;
+    margin: 30px auto 0 auto;
+    width: fit-content;
+}
+
+#summaryContent {
+    padding: 15px;
+    border: 1px dashed var(--accent-color);
+    border-radius: 5px;
+    background-color: rgba(0, 240, 255, 0.05);
+}
+
+#summaryContent p {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+#summaryContent strong {
+    color: var(--accent-color);
+}
+
+/* Hide utility class */
+.hidden {
+    display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.8em;
+    }
+
+    .neon-button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    main {
+        grid-template-columns: 1fr;
+    }
+
+    .team-section, .match-history-section {
+        padding: 15px;
+    }
+
+    .team-name {
+        font-size: 1.5em;
+    }
+
+    .player-list li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .player-list input[type="text"] {
+        margin-right: 0;
+        margin-bottom: 5px;
+        width: calc(100% - 16px); /* Adjust for padding */
+    }
+
+    .modal-content {
+        padding: 20px;
+    }
+}

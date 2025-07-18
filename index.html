@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROV Audit League</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ROV Audit League</h1>
+            <button id="addTeamBtn" class="neon-button">เพิ่มทีม</button>
+        </header>
+
+        <main>
+            <section class="team-section" id="team1-card">
+                <h2 class="team-name" data-team-id="team1">หมูเด้งFC <span class="score" id="score-team1">0</span></h2>
+                <div class="player-list hidden" id="players-team1">
+                    <h3>สมาชิกทีม</h3>
+                    <ul>
+                        <li><input type="text" value="ผู้เล่น 1" data-player-id="team1-p1"> - MVP: <span id="mvp-team1-p1">0</span></li>
+                        <li><input type="text" value="ผู้เล่น 2" data-player-id="team1-p2"> - MVP: <span id="mvp-team1-p2">0</span></li>
+                        <li><input type="text" value="ผู้เล่น 3" data-player-id="team1-p3"> - MVP: <span id="mvp-team1-p3">0</span></li>
+                        <li><input type="text" value="ผู้เล่น 4" data-player-id="team1-p4"> - MVP: <span id="mvp-team1-p4">0</span></li>
+                        <li><input type="text" value="ผู้เล่น 5" data-player-id="team1-p5"> - MVP: <span id="mvp-team1-p5">0</span></li>
+                        <li class="reserve"><input type="text" value="สำรอง 1" data-player-id="team1-r1"> - MVP: <span id="mvp-team1-r1">0</span></li>
+                        <li class="reserve"><input type="text" value="สำรอง 2" data-player-id="team1-r2"> - MVP: <span id="mvp-team1-r2">0</span></li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="team-section" id="team2-card">
+                <h2 class="team-name" data-team-id="team2">ยุ้ยอ้วน United <span class="score" id="score-team2">0</span></h2>
+                <div class="player-list hidden" id="players-team2">
+                    <h3>สมาชิกทีม</h3>
+                    <ul>
+                        <li><input type="text" value="ผู้เล่น A" data-player-id="team2-p1"> - MVP: <span id="mvp-team2-p1">0</span></li>
+                        <li><input type="text" value="ผู้เล่น B" data-player-id="team2-p2"> - MVP: <span id="mvp-team2-p2">0</span></li>
+                        <li><input type="text" value="ผู้เล่น C" data-player-id="team2-p3"> - MVP: <span id="mvp-team2-p3">0</span></li>
+                        <li><input type="text" value="ผู้เล่น D" data-player-id="team2-p4"> - MVP: <span id="mvp-team2-p4">0</span></li>
+                        <li><input type="text" value="ผู้เล่น E" data-player-id="team2-p5"> - MVP: <span id="mvp-team2-p5">0</span></li>
+                        <li class="reserve"><input type="text" value="สำรอง A" data-player-id="team2-r1"> - MVP: <span id="mvp-team2-r1">0</span></li>
+                        <li class="reserve"><input type="text" value="สำรอง B" data-player-id="team2-r2"> - MVP: <span id="mvp-team2-r2">0</span></li>
+                    </ul>
+                </div>
+            </section>
+
+            <div class="match-history-section">
+                <h2>บันทึกการแข่งขัน</h2>
+                <div id="calendar" class="calendar"></div>
+                <button id="addMatchBtn" class="neon-button">เพิ่มผลการแข่งขัน</button>
+                <div id="matchLog" class="match-log">
+                    </div>
+            </div>
+
+            <button id="summarizeBtn" class="neon-button summary-button">สรุปผลการแข่งขัน</button>
+        </main>
+    </div>
+
+    <div id="addMatchModal" class="modal">
+        <div class="modal-content cyberpunk-card">
+            <span class="close-button">&times;</span>
+            <h2>บันทึกผลการแข่งขัน</h2>
+            <form id="matchForm">
+                <label for="matchDate">วันที่แข่งขัน:</label>
+                <input type="text" id="matchDate" readonly>
+
+                <label for="winningTeam">ทีมที่ชนะ:</label>
+                <select id="winningTeam" name="winningTeam">
+                    <option value="team1">หมูเด้งFC</option>
+                    <option value="team2">ยุ้ยอ้วน United</option>
+                </select>
+
+                <label for="mvpPlayer">ผู้เล่น MVP:</label>
+                <select id="mvpPlayer" name="mvpPlayer">
+                    </select>
+
+                <button type="submit" class="neon-button">บันทึก</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="summaryModal" class="modal">
+        <div class="modal-content cyberpunk-card">
+            <span class="close-button">&times;</span>
+            <h2>สรุปผลการแข่งขัน</h2>
+            <div id="summaryContent">
+                </div>
+        </div>
+    </div>
+
+    <div id="addTeamModal" class="modal">
+        <div class="modal-content cyberpunk-card">
+            <span class="close-button">&times;</span>
+            <h2>เพิ่มทีมใหม่</h2>
+            <form id="newTeamForm">
+                <label for="newTeamName">ชื่อทีม:</label>
+                <input type="text" id="newTeamName" required>
+                <button type="submit" class="neon-button">เพิ่ม</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
