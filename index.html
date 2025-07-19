@@ -183,45 +183,49 @@
 
         <!-- Landing View -->
         <div id="landing-view" class="hidden text-center">
-            <h1 class="text-4xl md:text-6xl mb-4 glitch" data-text="ROV AUDIT LEAGUE">ROV AUDIT LEAGUE</h1>
-            <div id="landing-content">
-                <h2 id="landing-competition-month" class="text-2xl md:text-3xl text-accent-color mb-2"></h2>
-                <p id="landing-latest-match" class="text-lg md:text-xl mb-8"></p>
-            </div>
-            <div id="champion-view-landing" class="hidden my-8"></div>
-            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                <button id="enter-guest-btn" class="w-full sm:w-auto cyber-button secondary">เข้าสู่หน้าหลัก</button>
+             <div class="flex flex-col justify-center min-h-[80vh]">
+                <h1 class="text-4xl md:text-6xl mb-4 glitch" data-text="ROV AUDIT LEAGUE">ROV AUDIT LEAGUE</h1>
+                <div id="landing-content">
+                    <h2 id="landing-competition-month" class="text-2xl md:text-3xl text-accent-color mb-2"></h2>
+                    <p id="landing-latest-match" class="text-lg md:text-xl mb-8"></p>
+                </div>
+                <div id="champion-view-landing" class="hidden my-8"></div>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <button id="enter-guest-btn" class="w-full sm:w-auto cyber-button secondary">เข้าสู่หน้าหลัก</button>
+                </div>
             </div>
         </div>
 
         <!-- Main Content View (Scoreboard etc.) -->
         <div id="main-view" class="hidden">
-            <header class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
-                <h1 class="text-3xl md:text-4xl glitch cursor-pointer" data-text="ROV AUDIT LEAGUE" id="main-title">ROV AUDIT LEAGUE</h1>
-                 <div id="guest-controls" class="hidden flex-wrap justify-center items-center gap-2">
-                    <button id="show-history-btn-guest" class="cyber-button">ประวัติ</button>
-                    <button id="back-to-landing-btn" class="cyber-button secondary">กลับหน้าแรก</button>
-                    <button id="show-login-btn" class="cyber-button">สำหรับผู้ดูแล</button>
+            <div class="flex flex-col justify-center min-h-[80vh]">
+                <header class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+                    <h1 class="text-3xl md:text-4xl glitch cursor-pointer" data-text="ROV AUDIT LEAGUE" id="main-title">ROV AUDIT LEAGUE</h1>
+                     <div id="guest-controls" class="hidden flex-wrap justify-center items-center gap-2">
+                        <button id="show-history-btn-guest" class="cyber-button">ประวัติ</button>
+                        <button id="back-to-landing-btn" class="cyber-button secondary">กลับหน้าแรก</button>
+                        <button id="show-login-btn" class="cyber-button">สำหรับผู้ดูแล</button>
+                    </div>
+                </header>
+
+                <div class="text-center mb-6">
+                    <h2 id="competition-month" class="text-2xl text-accent-color"></h2>
+                    <div id="latest-match-info" class="mt-2 text-lg"></div>
                 </div>
-            </header>
+                
+                <div id="champion-view-main" class="hidden my-8"></div>
+                <div id="scoreboard" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
 
-            <div class="text-center mb-6">
-                <h2 id="competition-month" class="text-2xl text-accent-color"></h2>
-                <div id="latest-match-info" class="mt-2 text-lg"></div>
-            </div>
-            
-            <div id="champion-view-main" class="hidden my-8"></div>
-            <div id="scoreboard" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
-
-            <div id="admin-controls" class="hidden mt-8">
-                <div class="cyber-panel p-4 flex flex-wrap justify-center gap-2">
-                    <button id="manage-teams-btn" class="cyber-button">จัดการทีม</button>
-                    <button id="record-match-btn" class="cyber-button">บันทึกผล</button>
-                    <button id="record-history-btn" class="cyber-button">บันทึกผลย้อนหลัง</button>
-                    <button id="show-history-btn-admin" class="cyber-button">ประวัติ</button>
-                    <button id="summarize-btn-admin" class="cyber-button secondary">สรุปผล/รับถ้วย</button>
-                    <button id="new-comp-btn" class="cyber-button danger">เริ่มเดือนใหม่</button>
-                    <button id="logout-btn" class="cyber-button">Logout</button>
+                <div id="admin-controls" class="hidden mt-8">
+                    <div class="cyber-panel p-4 flex flex-wrap justify-center gap-2">
+                        <button id="manage-teams-btn" class="cyber-button">จัดการทีม</button>
+                        <button id="record-match-btn" class="cyber-button">บันทึกผล</button>
+                        <button id="record-history-btn" class="cyber-button">บันทึกผลย้อนหลัง</button>
+                        <button id="show-history-btn-admin" class="cyber-button">ประวัติ</button>
+                        <button id="summarize-btn-admin" class="cyber-button secondary">สรุปผล/รับถ้วย</button>
+                        <button id="new-comp-btn" class="cyber-button danger">เริ่มเดือนใหม่</button>
+                        <button id="logout-btn" class="cyber-button">Logout</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -338,6 +342,10 @@
                     <label for="history-record-mvp" class="block text-primary-color mb-1">ผู้เล่น MVP</label>
                     <select id="history-record-mvp" class="w-full cyber-input" required></select>
                 </div>
+                 <div>
+                    <label for="history-record-mvp-count" class="block text-primary-color mb-1">จำนวน MVP</label>
+                    <input type="number" id="history-record-mvp-count" class="w-full cyber-input" required min="0" value="1">
+                </div>
                 <div class="mt-6 flex justify-end space-x-4">
                     <button type="submit" class="cyber-button">บันทึก</button>
                     <button type="button" id="close-record-history-modal-btn" class="cyber-button secondary">ยกเลิก</button>
@@ -361,6 +369,10 @@
                 <div>
                     <label for="history-mvp-player" class="block text-primary-color mb-1">ผู้เล่น MVP</label>
                     <select id="history-mvp-player" class="w-full cyber-input" required></select>
+                </div>
+                 <div>
+                    <label for="edit-history-mvp-count" class="block text-primary-color mb-1">จำนวน MVP</label>
+                    <input type="number" id="edit-history-mvp-count" class="w-full cyber-input" required min="0">
                 </div>
                 <div class="mt-6 flex justify-end space-x-4">
                     <button type="submit" class="cyber-button">บันทึก</button>
@@ -594,12 +606,13 @@
             const landingContent = document.getElementById('landing-content');
 
             if (competitionStatus.isSummarized) {
+                const mvpCountText = competitionStatus.overallMvpCount ? ` (MVP: ${competitionStatus.overallMvpCount})` : '';
                 const content = `
                     <div class="cyber-panel champion-panel p-6 max-w-md mx-auto">
                         <p class="text-xl mb-2">แชมป์ประจำเดือน ${competitionStatus.month}</p>
                         <h3 class="text-4xl text-accent-color font-bold">${competitionStatus.winnerTeamName}</h3>
                         <p class="text-lg mt-4 mb-2">MVP ประจำเดือน</p>
-                        <h4 class="text-3xl text-yellow-300">${competitionStatus.overallMvpName}</h4>
+                        <h4 class="text-3xl text-yellow-300">${competitionStatus.overallMvpName}${mvpCountText}</h4>
                     </div>`;
                 championViewMain.innerHTML = content;
                 championViewLanding.innerHTML = content;
@@ -945,14 +958,16 @@
 
             let finalWinnerName;
             let finalMvpName;
+            let finalMvpCount = 0;
 
-            if (scores.length > 1 && scores[0].score === scores[1].score) {
+            if (scores.length > 1 && scores[0].score === scores[1].score && scores[0].score > 0) {
                 // Draw condition
                 finalWinnerName = "เสมอ";
                 const allMembers = teamsData.flatMap(team => team.members);
                 if (allMembers.length > 0) {
                     allMembers.sort((a, b) => (b.mvpCount || 0) - (a.mvpCount || 0));
                     finalMvpName = allMembers[0].name;
+                    finalMvpCount = allMembers[0].mvpCount;
                 } else {
                     finalMvpName = "N/A";
                 }
@@ -963,6 +978,7 @@
                 if (winningTeam.members && winningTeam.members.length > 0) {
                     winningTeam.members.sort((a, b) => (b.mvpCount || 0) - (a.mvpCount || 0));
                     finalMvpName = winningTeam.members[0].name;
+                    finalMvpCount = winningTeam.members[0].mvpCount;
                 } else {
                     finalMvpName = "N/A";
                 }
@@ -973,7 +989,8 @@
             batch.set(statusRef, { 
                 isSummarized: true, 
                 winnerTeamName: finalWinnerName, 
-                overallMvpName: finalMvpName, 
+                overallMvpName: finalMvpName,
+                overallMvpCount: finalMvpCount,
                 month: competitionStatus.month 
             });
 
@@ -981,7 +998,8 @@
             batch.set(historyRef, { 
                 month: competitionStatus.month, 
                 winner: finalWinnerName, 
-                mvp: finalMvpName 
+                mvp: finalMvpName,
+                mvpCount: finalMvpCount
             });
             
             try {
@@ -999,11 +1017,12 @@
             listEl.innerHTML = '';
             if (historyData.length > 0) {
                 historyData.forEach(record => {
+                    const mvpCountText = record.mvpCount ? ` (${record.mvpCount})` : '';
                     const recordDiv = document.createElement('div');
                     recordDiv.className = 'p-2 bg-gray-900/50 border-l-2 border-accent-color flex justify-between items-center';
                     recordDiv.innerHTML = `
                         <div>
-                            <strong>${record.month}:</strong> ทีม <span class="text-primary-color">${record.winner}</span> ชนะ | MVP: <span class="text-yellow-300">${record.mvp}</span>
+                            <strong>${record.month}:</strong> ทีม <span class="text-primary-color">${record.winner}</span> ชนะ | MVP: <span class="text-yellow-300">${record.mvp}${mvpCountText}</span>
                         </div>
                         ${currentUser ? `
                         <div class="flex gap-2">
@@ -1038,8 +1057,10 @@
             const monthInput = document.getElementById('history-month');
             const winnerSelect = document.getElementById('history-winner-team');
             const mvpSelect = document.getElementById('history-mvp-player');
+            const mvpCountInput = document.getElementById('edit-history-mvp-count');
 
             monthInput.value = record.month;
+            mvpCountInput.value = record.mvpCount || 0;
             
             winnerSelect.innerHTML = '';
             teamsData.forEach(team => {
@@ -1123,6 +1144,7 @@
             const monthIndex = document.getElementById('history-record-month').value;
             const winner = document.getElementById('history-record-winner').value;
             const mvp = document.getElementById('history-record-mvp').value;
+            const mvpCount = document.getElementById('history-record-mvp-count').value;
 
             const thaiMonths = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
             const monthString = `${thaiMonths[monthIndex]} ${parseInt(year) + 543}`;
@@ -1134,7 +1156,7 @@
             }
 
             try {
-                await addDoc(collection(db, "history"), { month: monthString, winner, mvp });
+                await addDoc(collection(db, "history"), { month: monthString, winner, mvp, mvpCount: parseInt(mvpCount) });
                 showAlert('สำเร็จ', 'บันทึกประวัติย้อนหลังเรียบร้อยแล้ว');
                 closeModal('record-history-modal');
             } catch (error) {
@@ -1146,9 +1168,10 @@
         async function handleUpdateHistory(historyId) {
             const winner = document.getElementById('history-winner-team').value;
             const mvp = document.getElementById('history-mvp-player').value;
+            const mvpCount = document.getElementById('edit-history-mvp-count').value;
 
             try {
-                await updateDoc(doc(db, "history", historyId), { winner, mvp });
+                await updateDoc(doc(db, "history", historyId), { winner, mvp, mvpCount: parseInt(mvpCount) });
                 showAlert('สำเร็จ', 'แก้ไขประวัติเรียบร้อยแล้ว');
                 closeModal('edit-history-modal');
             } catch (error) {
