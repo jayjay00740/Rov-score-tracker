@@ -4,105 +4,201 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ROV Audit League</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>ROV Audit League</h1>
-            <button id="addTeamBtn" class="neon-button">เพิ่มทีม</button>
+<body class="p-4 sm:p-6 md:p-8">
+
+    <div id="admin-controls" class="absolute top-4 right-4 z-20">
+        <button id="auth-button" class="cyber-button cyber-button-ghost px-6 py-2">ผู้ดูแลระบบ</button>
+    </div>
+
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <header class="text-center mb-8 pt-12">
+            <h1 class="font-orbitron text-4xl sm:text-5xl md:text-6xl font-bold text-white" style="text-shadow: 0 0 10px var(--primary-glow), 0 0 20px var(--primary-glow);">
+                ROV Audit League
+            </h1>
+            <p class="text-lg text-gray-400 mt-2">การแข่งขันสุดเดือดแห่งปี</p>
         </header>
 
-        <main>
-            <section class="team-section" id="team1-card">
-                <h2 class="team-name" data-team-id="team1">หมูเด้งFC <span class="score" id="score-team1">0</span></h2>
-                <div class="player-list hidden" id="players-team1">
-                    <h3>สมาชิกทีม</h3>
-                    <ul>
-                        <li><input type="text" value="ผู้เล่น 1" data-player-id="team1-p1"> - MVP: <span id="mvp-team1-p1">0</span></li>
-                        <li><input type="text" value="ผู้เล่น 2" data-player-id="team1-p2"> - MVP: <span id="mvp-team1-p2">0</span></li>
-                        <li><input type="text" value="ผู้เล่น 3" data-player-id="team1-p3"> - MVP: <span id="mvp-team1-p3">0</span></li>
-                        <li><input type="text" value="ผู้เล่น 4" data-player-id="team1-p4"> - MVP: <span id="mvp-team1-p4">0</span></li>
-                        <li><input type="text" value="ผู้เล่น 5" data-player-id="team1-p5"> - MVP: <span id="mvp-team1-p5">0</span></li>
-                        <li class="reserve"><input type="text" value="สำรอง 1" data-player-id="team1-r1"> - MVP: <span id="mvp-team1-r1">0</span></li>
-                        <li class="reserve"><input type="text" value="สำรอง 2" data-player-id="team1-r2"> - MVP: <span id="mvp-team1-r2">0</span></li>
-                    </ul>
+        <!-- Scoreboard -->
+        <main id="scoreboard" class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-8">
+            <!-- Team 1 -->
+            <div class="cyber-card p-6 rounded-lg flex flex-col items-center justify-center">
+                <div class="flex items-center gap-4">
+                    <h2 id="team-1-name" class="font-orbitron text-2xl sm:text-3xl font-bold text-cyan-300 cursor-pointer" onclick="showTeamDetails('team1')">กำลังโหลด...</h2>
+                    <button id="edit-team-1-btn" class="hidden" onclick="showEditTeamModal('team1')">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-cyan-300 hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L15.232 5.232z" /></svg>
+                    </button>
                 </div>
-            </section>
-
-            <section class="team-section" id="team2-card">
-                <h2 class="team-name" data-team-id="team2">ยุ้ยอ้วน United <span class="score" id="score-team2">0</span></h2>
-                <div class="player-list hidden" id="players-team2">
-                    <h3>สมาชิกทีม</h3>
-                    <ul>
-                        <li><input type="text" value="ผู้เล่น A" data-player-id="team2-p1"> - MVP: <span id="mvp-team2-p1">0</span></li>
-                        <li><input type="text" value="ผู้เล่น B" data-player-id="team2-p2"> - MVP: <span id="mvp-team2-p2">0</span></li>
-                        <li><input type="text" value="ผู้เล่น C" data-player-id="team2-p3"> - MVP: <span id="mvp-team2-p3">0</span></li>
-                        <li><input type="text" value="ผู้เล่น D" data-player-id="team2-p4"> - MVP: <span id="mvp-team2-p4">0</span></li>
-                        <li><input type="text" value="ผู้เล่น E" data-player-id="team2-p5"> - MVP: <span id="mvp-team2-p5">0</span></li>
-                        <li class="reserve"><input type="text" value="สำรอง A" data-player-id="team2-r1"> - MVP: <span id="mvp-team2-r1">0</span></li>
-                        <li class="reserve"><input type="text" value="สำรอง B" data-player-id="team2-r2"> - MVP: <span id="mvp-team2-r2">0</span></li>
-                    </ul>
-                </div>
-            </section>
-
-            <div class="match-history-section">
-                <h2>บันทึกการแข่งขัน</h2>
-                <div id="calendar" class="calendar"></div>
-                <button id="addMatchBtn" class="neon-button">เพิ่มผลการแข่งขัน</button>
-                <div id="matchLog" class="match-log">
-                    </div>
+                <p class="text-6xl sm:text-7xl font-bold my-4" id="team-1-score">0</p>
+                <p class="text-gray-400">คะแนน</p>
             </div>
-
-            <button id="summarizeBtn" class="neon-button summary-button">สรุปผลการแข่งขัน</button>
-        </main>
-    </div>
-
-    <div id="addMatchModal" class="modal">
-        <div class="modal-content cyberpunk-card">
-            <span class="close-button">&times;</span>
-            <h2>บันทึกผลการแข่งขัน</h2>
-            <form id="matchForm">
-                <label for="matchDate">วันที่แข่งขัน:</label>
-                <input type="text" id="matchDate" readonly>
-
-                <label for="winningTeam">ทีมที่ชนะ:</label>
-                <select id="winningTeam" name="winningTeam">
-                    <option value="team1">หมูเด้งFC</option>
-                    <option value="team2">ยุ้ยอ้วน United</option>
-                </select>
-
-                <label for="mvpPlayer">ผู้เล่น MVP:</label>
-                <select id="mvpPlayer" name="mvpPlayer">
-                    </select>
-
-                <button type="submit" class="neon-button">บันทึก</button>
-            </form>
-        </div>
-    </div>
-
-    <div id="summaryModal" class="modal">
-        <div class="modal-content cyberpunk-card">
-            <span class="close-button">&times;</span>
-            <h2>สรุปผลการแข่งขัน</h2>
-            <div id="summaryContent">
+            <!-- Team 2 -->
+            <div class="cyber-card cyber-card-secondary p-6 rounded-lg flex flex-col items-center justify-center">
+                 <div class="flex items-center gap-4">
+                    <h2 id="team-2-name" class="font-orbitron text-2xl sm:text-3xl font-bold text-pink-400 cursor-pointer" onclick="showTeamDetails('team2')">กำลังโหลด...</h2>
+                    <button id="edit-team-2-btn" class="hidden" onclick="showEditTeamModal('team2')">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-pink-400 hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L15.232 5.232z" /></svg>
+                    </button>
                 </div>
+                <p class="text-6xl sm:text-7xl font-bold my-4" id="team-2-score">0</p>
+                <p class="text-gray-400">คะแนน</p>
+            </div>
+        </main>
+
+        <!-- Action Buttons -->
+        <div id="action-buttons-container" class="flex flex-col sm:flex-row justify-center items-center gap-4">
+            <button id="record-match-btn" class="cyber-button w-full sm:w-auto px-8 py-4 hidden">บันทึกผลการแข่งขัน</button>
+            <button id="summary-btn" class="cyber-button cyber-button-secondary w-full sm:w-auto px-8 py-4">สรุปผลการแข่งขัน</button>
+            <button id="end-competition-btn" class="cyber-button bg-red-600 border-red-600 hover:bg-transparent hover:text-red-500 w-full sm:w-auto px-8 py-4 hidden">จบการแข่งขัน</button>
+            <button id="reset-competition-btn" class="cyber-button w-full sm:w-auto px-8 py-4 hidden">เริ่มการแข่งขันใหม่</button>
         </div>
     </div>
 
-    <div id="addTeamModal" class="modal">
-        <div class="modal-content cyberpunk-card">
-            <span class="close-button">&times;</span>
-            <h2>เพิ่มทีมใหม่</h2>
-            <form id="newTeamForm">
-                <label for="newTeamName">ชื่อทีม:</label>
-                <input type="text" id="newTeamName" required>
-                <button type="submit" class="neon-button">เพิ่ม</button>
+    <!-- Modals -->
+    <!-- Login Modal -->
+    <div id="login-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden">
+        <div class="cyber-card w-full max-w-sm mx-auto rounded-lg shadow-lg" onclick="event.stopPropagation()">
+            <form id="login-form" class="p-6 space-y-4">
+                <h3 class="font-orbitron text-2xl font-bold mb-4 text-center text-cyan-300">Admin Login</h3>
+                <div>
+                    <label for="email" class="block mb-2 text-sm font-bold text-gray-300">Email</label>
+                    <input type="email" id="email" class="cyber-input rounded-md" required>
+                </div>
+                <div>
+                    <label for="password" class="block mb-2 text-sm font-bold text-gray-300">Password</label>
+                    <input type="password" id="password" class="cyber-input rounded-md" required>
+                </div>
+                <p id="login-error" class="text-red-500 text-sm text-center h-4"></p>
+                <div class="flex gap-4 pt-4">
+                    <button type="button" class="cyber-button cyber-button-ghost w-full py-3" onclick="closeAllModals()">ยกเลิก</button>
+                    <button type="submit" class="cyber-button w-full py-3">เข้าสู่ระบบ</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Edit Team Modal -->
+    <div id="edit-team-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden">
+        <div class="cyber-card w-full max-w-sm mx-auto rounded-lg shadow-lg" onclick="event.stopPropagation()">
+            <form id="edit-team-form" class="p-6 space-y-4">
+                <h3 class="font-orbitron text-2xl font-bold mb-4 text-center text-cyan-300">แก้ไขชื่อทีม</h3>
+                <input type="hidden" id="edit-team-id">
+                <div>
+                    <label for="new-team-name" class="block mb-2 text-sm font-bold text-gray-300">ชื่อทีมใหม่</label>
+                    <input type="text" id="new-team-name" class="cyber-input rounded-md" required>
+                </div>
+                <div class="flex gap-4 pt-4">
+                    <button type="button" class="cyber-button cyber-button-ghost w-full py-3" onclick="closeAllModals()">ยกเลิก</button>
+                    <button type="submit" class="cyber-button w-full py-3">บันทึก</button>
+                </div>
             </form>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Team Details Modal -->
+    <div id="team-details-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden">
+        <div class="cyber-card w-full max-w-md mx-auto rounded-lg shadow-lg overflow-hidden" onclick="event.stopPropagation()">
+            <div class="p-6">
+                <h3 id="modal-team-name" class="font-orbitron text-2xl font-bold mb-4 text-center"></h3>
+                <div id="modal-player-list" class="space-y-3 max-h-80 overflow-y-auto pr-2">
+                    <!-- Player items will be injected here -->
+                </div>
+                <button class="cyber-button cyber-button-ghost w-full mt-6 py-3" onclick="closeAllModals()">ปิด</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Record Match Modal -->
+    <div id="record-match-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden">
+        <div class="cyber-card w-full max-w-md mx-auto rounded-lg shadow-lg" onclick="event.stopPropagation()">
+            <form id="record-match-form" class="p-6 space-y-4">
+                <h3 class="font-orbitron text-2xl font-bold mb-4 text-center text-cyan-300">บันทึกผลการแข่งขัน</h3>
+                <div>
+                    <label for="match-date" class="block mb-2 text-sm font-bold text-gray-300">วันที่แข่งขัน</label>
+                    <input type="date" id="match-date" class="cyber-input rounded-md" required>
+                </div>
+                <div>
+                    <label for="winning-team" class="block mb-2 text-sm font-bold text-gray-300">ทีมที่ชนะ</label>
+                    <select id="winning-team" class="cyber-select rounded-md" required>
+                        <!-- Options will be populated by JS -->
+                    </select>
+                </div>
+                <div>
+                    <label for="mvp-player" class="block mb-2 text-sm font-bold text-gray-300">ผู้เล่น MVP</label>
+                    <select id="mvp-player" class="cyber-select rounded-md" required>
+                        <!-- Options will be populated by JS based on winning team -->
+                    </select>
+                </div>
+                <div class="flex gap-4 pt-4">
+                    <button type="button" class="cyber-button cyber-button-ghost w-full py-3" onclick="closeAllModals()">ยกเลิก</button>
+                    <button type="submit" class="cyber-button w-full py-3">บันทึก</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Summary Modal -->
+    <div id="summary-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden">
+        <div class="cyber-card w-full max-w-lg mx-auto rounded-lg shadow-lg" onclick="event.stopPropagation()">
+            <div class="p-8 text-center">
+                <h3 class="font-orbitron text-3xl font-bold mb-4 text-pink-400">สรุปผลการแข่งขัน</h3>
+                <div id="summary-content" class="text-lg space-y-4">
+                    <!-- Summary content will be injected here -->
+                </div>
+                <div class="flex gap-4 mt-8">
+                    <button class="cyber-button cyber-button-ghost w-full py-3" onclick="closeAllModals()">ปิด</button>
+                    <button id="show-details-btn" class="cyber-button w-full py-3 hidden">รายละเอียดการแข่งขัน</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Competition In Progress Modal -->
+    <div id="in-progress-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden">
+        <div class="cyber-card w-full max-w-sm mx-auto rounded-lg shadow-lg" onclick="event.stopPropagation()">
+            <div class="p-8 text-center">
+                <h3 class="font-orbitron text-2xl font-bold mb-4 text-cyan-300">อยู่ระหว่างการแข่งขัน</h3>
+                <p class="text-gray-300 mb-6">กรุณารอผู้ดูแลระบบทำการจบการแข่งขันก่อนจึงจะสามารถดูสรุปผลได้</p>
+                <button class="cyber-button cyber-button-ghost w-full py-3" onclick="closeAllModals()">ปิด</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Confirm End Competition Modal -->
+    <div id="confirm-end-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden">
+        <div class="cyber-card w-full max-w-sm mx-auto rounded-lg shadow-lg" onclick="event.stopPropagation()">
+            <div class="p-8 text-center">
+                <h3 class="font-orbitron text-2xl font-bold mb-4 text-red-500">ยืนยันการจบการแข่งขัน</h3>
+                <p class="text-gray-300 mb-6">คุณแน่ใจหรือไม่ว่าต้องการจบการแข่งขัน? การกระทำนี้ไม่สามารถย้อนกลับได้จนกว่าจะเริ่มฤดูกาลใหม่</p>
+                <div class="flex gap-4">
+                    <button type="button" class="cyber-button cyber-button-ghost w-full py-3" onclick="closeAllModals()">ยกเลิก</button>
+                    <button id="confirm-end-btn" class="cyber-button bg-red-600 border-red-600 hover:bg-transparent hover:text-red-500 w-full py-3">ยืนยัน</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Match History Modal -->
+    <div id="match-history-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden">
+        <div class="cyber-card w-full max-w-2xl mx-auto rounded-lg shadow-lg flex flex-col" style="height: 80vh;" onclick="event.stopPropagation()">
+            <div class="p-6 border-b border-cyan-500/30">
+                <h3 class="font-orbitron text-2xl font-bold text-center text-cyan-300">ประวัติการแข่งขัน</h3>
+            </div>
+            <div id="match-history-list" class="flex-grow p-6 overflow-y-auto space-y-3">
+                <!-- History items will be injected here -->
+            </div>
+            <div class="p-4 border-t border-cyan-500/30">
+                <button class="cyber-button cyber-button-ghost w-full py-3" onclick="closeAllModals()">ปิด</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
 </body>
 </html>
