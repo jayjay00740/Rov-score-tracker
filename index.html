@@ -951,8 +951,8 @@
         async function handleFinalizeSummary() {
             const scores = [...teamsData].sort((a, b) => (b.score || 0) - (a.score || 0));
             
-            if (scores.length < 1) {
-                showAlert('ไม่สามารถสรุปผลได้', 'มีข้อมูลไม่เพียงพอ');
+            if (scores.length < 1 || scores[0].score === 0) {
+                showAlert('ไม่สามารถสรุปผลได้', 'ยังไม่มีการแข่งขันหรือคะแนน');
                 return;
             }
 
@@ -960,14 +960,14 @@
             let finalMvpName;
             let finalMvpCount = 0;
 
-            if (scores.length > 1 && scores[0].score === scores[1].score && scores[0].score > 0) {
+            if (scores.length > 1 && scores[0].score === scores[1].score) {
                 // Draw condition
                 finalWinnerName = "เสมอ";
                 const allMembers = teamsData.flatMap(team => team.members);
                 if (allMembers.length > 0) {
                     allMembers.sort((a, b) => (b.mvpCount || 0) - (a.mvpCount || 0));
                     finalMvpName = allMembers[0].name;
-                    finalMvpCount = allMembers[0].mvpCount;
+                    finalMvpCount = allMembers[0].mvpCount || 0;
                 } else {
                     finalMvpName = "N/A";
                 }
@@ -978,7 +978,7 @@
                 if (winningTeam.members && winningTeam.members.length > 0) {
                     winningTeam.members.sort((a, b) => (b.mvpCount || 0) - (a.mvpCount || 0));
                     finalMvpName = winningTeam.members[0].name;
-                    finalMvpCount = winningTeam.members[0].mvpCount;
+                    finalMvpCount = winningTeam.members[0].mvpCount || 0;
                 } else {
                     finalMvpName = "N/A";
                 }
@@ -1017,7 +1017,7 @@
             listEl.innerHTML = '';
             if (historyData.length > 0) {
                 historyData.forEach(record => {
-                    const mvpCountText = record.mvpCount ? ` (${record.mvpCount})` : '';
+                    const mvpCountText = record.mvpCount ? ` (MVP: ${record.mvpCount})` : '';
                     const recordDiv = document.createElement('div');
                     recordDiv.className = 'p-2 bg-gray-900/50 border-l-2 border-accent-color flex justify-between items-center';
                     recordDiv.innerHTML = `
