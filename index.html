@@ -183,19 +183,8 @@
 
         <!-- Main Content View (Scoreboard etc.) -->
         <div id="main-view" class="hidden">
-            <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+            <header class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
                 <h1 class="text-3xl md:text-4xl glitch cursor-pointer" data-text="ROV AUDIT LEAGUE" id="main-title">ROV AUDIT LEAGUE</h1>
-                <div id="admin-controls" class="hidden">
-                    <div class="border border-primary-color p-2 flex flex-col items-stretch md:items-end gap-2">
-                        <button id="manage-teams-btn" class="cyber-button w-full text-left">จัดการทีม</button>
-                        <button id="record-match-btn" class="cyber-button w-full text-left">บันทึกผล</button>
-                        <button id="record-history-btn" class="cyber-button w-full text-left">บันทึกผลย้อนหลัง</button>
-                        <button id="show-history-btn-admin" class="cyber-button w-full text-left">ประวัติ</button>
-                        <button id="summarize-btn-admin" class="cyber-button secondary w-full text-left">สรุปผล/รับถ้วย</button>
-                        <button id="new-comp-btn" class="cyber-button danger w-full text-left">เริ่มเดือนใหม่</button>
-                        <button id="logout-btn" class="cyber-button w-full text-left">Logout</button>
-                    </div>
-                </div>
                  <div id="guest-controls" class="hidden flex-wrap justify-center items-center gap-2">
                     <button id="show-history-btn-guest" class="cyber-button">ประวัติ</button>
                     <button id="summarize-btn-guest" class="cyber-button">ดูสรุปผล</button>
@@ -209,6 +198,18 @@
             </div>
 
             <div id="scoreboard" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+
+            <div id="admin-controls" class="hidden mt-8">
+                <div class="cyber-panel p-4 flex flex-wrap justify-center gap-2">
+                    <button id="manage-teams-btn" class="cyber-button">จัดการทีม</button>
+                    <button id="record-match-btn" class="cyber-button">บันทึกผล</button>
+                    <button id="record-history-btn" class="cyber-button">บันทึกผลย้อนหลัง</button>
+                    <button id="show-history-btn-admin" class="cyber-button">ประวัติ</button>
+                    <button id="summarize-btn-admin" class="cyber-button secondary">สรุปผล/รับถ้วย</button>
+                    <button id="new-comp-btn" class="cyber-button danger">เริ่มเดือนใหม่</button>
+                    <button id="logout-btn" class="cyber-button">Logout</button>
+                </div>
+            </div>
         </div>
     </div>
 
