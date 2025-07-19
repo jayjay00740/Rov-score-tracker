@@ -1,413 +1,111 @@
+/* --- Custom Styles for Cyberpunk Theme --- */
 :root {
-    --bg-color: #1a1a2e; /* Dark background */
-    --text-color: #e0e0e0; /* Light grey text */
-    --accent-color: #00f0ff; /* Neon blue */
-    --secondary-accent-color: #ff007f; /* Neon pink */
-    --card-bg: #2a2a4a; /* Slightly lighter dark for cards */
-    --border-color: #00f0ff;
-    --input-bg: #3a3a5a;
-    --button-hover-bg: #00aaff;
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+    --primary-glow: #00f6ff;
+    --secondary-glow: #ff00c1;
+    --background-dark: #0d0d1a;
+    --surface-dark: #1a1a2e;
+    --text-light: #e0e0fc;
+    --text-dark: #16213e;
 }
 
 body {
-    font-family: 'Roboto Mono', monospace; /* Monospaced for a techy feel */
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    line-height: 1.6;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
-    overflow-y: auto; /* Allow scrolling for content */
+    font-family: 'Sarabun', sans-serif;
+    background-color: var(--background-dark);
+    color: var(--text-light);
+    background-image:
+        linear-gradient(rgba(13, 13, 26, 0.95), rgba(13, 13, 26, 0.95)),
+        url('https://placehold.co/1920x1080/0d0d1a/1a1a2e?text=GRID');
+    background-attachment: fixed;
 }
 
-.container {
-    width: 100%;
-    max-width: 1200px;
-    background-color: var(--bg-color);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3); /* Subtle neon glow */
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    padding-bottom: 15px;
-    border-bottom: 2px solid var(--accent-color);
-}
-
-h1 {
-    font-family: 'Orbitron', sans-serif; /* Futuristic heading font */
-    color: var(--accent-color);
-    text-shadow: 0 0 10px var(--accent-color);
-    font-size: 2.5em;
-}
-
-h2, h3 {
-    color: var(--secondary-accent-color);
-    margin-bottom: 15px;
+.font-orbitron {
     font-family: 'Orbitron', sans-serif;
 }
 
-/* Neon Button Style */
-.neon-button {
-    background-color: transparent;
-    border: 2px solid var(--accent-color);
-    color: var(--accent-color);
-    padding: 10px 20px;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1em;
-    cursor: pointer;
+.cyber-card {
+    background-color: var(--surface-dark);
+    border: 1px solid var(--primary-glow);
+    box-shadow: 0 0 15px rgba(0, 246, 255, 0.3), inset 0 0 10px rgba(0, 246, 255, 0.2);
     transition: all 0.3s ease;
-    box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
 }
 
-.neon-button:hover {
-    color: var(--bg-color);
-    background-color: var(--accent-color);
-    box-shadow: 0 0 20px var(--accent-color), 0 0 40px var(--accent-color);
+.cyber-card-secondary {
+    border-color: var(--secondary-glow);
+    box-shadow: 0 0 15px rgba(255, 0, 193, 0.3), inset 0 0 10px rgba(255, 0, 193, 0.2);
 }
 
-.neon-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: 0.5s;
-}
-
-.neon-button:hover::before {
-    left: 100%;
-}
-
-/* Team Sections */
-main {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.team-section, .match-history-section {
-    background-color: var(--card-bg);
-    padding: 25px;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 0 15px rgba(255, 0, 127, 0.2); /* Pink glow for sections */
-}
-
-.team-name {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 1.8em;
-    cursor: pointer;
-    margin-bottom: 15px;
-    color: var(--accent-color);
-    border-bottom: 1px dashed var(--secondary-accent-color);
-    padding-bottom: 10px;
-}
-
-.team-name:hover {
-    text-shadow: 0 0 8px var(--accent-color);
-}
-
-.score {
-    font-size: 1.2em;
-    color: var(--secondary-accent-color);
+.cyber-button {
     font-family: 'Orbitron', sans-serif;
+    background-color: var(--primary-glow);
+    color: var(--text-dark);
+    border: 1px solid var(--primary-glow);
+    clip-path: polygon(92% 0, 100% 25%, 100% 100%, 8% 100%, 0% 75%, 0 0);
+    transition: all 0.3s ease;
+    font-weight: 700;
 }
 
-.player-list ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-.player-list li {
-    margin-bottom: 8px;
-    padding: 5px 0;
-    border-bottom: 1px dotted rgba(255, 255, 255, 0.1);
-    display: flex;
-    align-items: center;
-}
-
-.player-list li:last-child {
-    border-bottom: none;
-}
-
-.player-list input[type="text"] {
-    background-color: var(--input-bg);
-    border: 1px solid var(--accent-color);
-    color: var(--text-color);
-    padding: 5px 8px;
-    border-radius: 3px;
-    font-family: 'Roboto Mono', monospace;
-    flex-grow: 1;
-    margin-right: 10px;
-}
-
-.player-list input[type="text"]:focus {
-    outline: none;
-    box-shadow: 0 0 5px var(--accent-color);
-}
-
-.player-list .reserve {
-    opacity: 0.7; /* Dim reserve players slightly */
-}
-
-/* Calendar Styling (Simple) */
-.calendar {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-    margin-bottom: 20px;
-    background-color: var(--input-bg);
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid var(--secondary-accent-color);
-}
-
-.calendar span {
-    text-align: center;
-    padding: 8px;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: background-color 0.2s ease, box-shadow 0.2s ease;
-    border: 1px solid transparent;
-}
-
-.calendar span.day-header {
-    font-weight: bold;
-    color: var(--secondary-accent-color);
+.cyber-button:hover {
     background-color: transparent;
-    cursor: default;
+    color: var(--primary-glow);
+    box-shadow: 0 0 20px var(--primary-glow);
 }
 
-.calendar span.day {
-    background-color: rgba(0, 240, 255, 0.1);
+.cyber-button-secondary {
+    background-color: var(--secondary-glow);
+    border-color: var(--secondary-glow);
 }
 
-.calendar span.day:hover {
-    background-color: var(--accent-color);
-    color: var(--bg-color);
-    box-shadow: 0 0 8px var(--accent-color);
-}
-
-.calendar span.day.selected {
-    background-color: var(--secondary-accent-color);
-    color: var(--bg-color);
-    box-shadow: 0 0 10px var(--secondary-accent-color);
-    border: 1px solid var(--secondary-accent-color);
-}
-
-.calendar span.empty {
+.cyber-button-secondary:hover {
     background-color: transparent;
-    cursor: default;
+    color: var(--secondary-glow);
+    box-shadow: 0 0 20px var(--secondary-glow);
 }
 
-/* Match Log */
-.match-log {
-    max-height: 300px;
-    overflow-y: auto;
-    border: 1px solid var(--border-color);
-    padding: 15px;
-    border-radius: 5px;
-    background-color: var(--input-bg);
+.cyber-button-ghost {
+    background-color: transparent;
+    color: var(--primary-glow);
+    border: 1px solid var(--primary-glow);
 }
 
-.match-entry {
-    background-color: var(--card-bg);
-    border: 1px solid var(--secondary-accent-color);
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    font-size: 0.9em;
+.cyber-button-ghost:hover {
+    background-color: var(--primary-glow);
+    color: var(--text-dark);
 }
 
-.match-entry strong {
-    color: var(--accent-color);
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
 }
 
-/* Modal Styles */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 100; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
-    backdrop-filter: blur(5px); /* Frosted glass effect */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background-color: var(--card-bg);
-    margin: auto;
-    padding: 30px;
-    border: 2px solid var(--accent-color);
-    width: 90%;
-    max-width: 500px;
-    border-radius: 10px;
-    box-shadow: 0 0 25px var(--accent-color);
-    position: relative;
-    animation: fadeInScale 0.3s ease-out;
-}
-
-.cyberpunk-card {
-    background-image: linear-gradient(45deg, #2a2a4a 0%, #1a1a2e 100%);
-    border: 2px solid var(--accent-color);
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.4), 0 0 40px rgba(255, 0, 127, 0.2);
-}
-
-@keyframes fadeInScale {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-.close-button {
-    color: var(--secondary-accent-color);
-    font-size: 28px;
-    font-weight: bold;
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.close-button:hover,
-.close-button:focus {
-    color: var(--accent-color);
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.modal-content h2 {
-    color: var(--accent-color);
-    margin-bottom: 20px;
-    text-align: center;
-    text-shadow: 0 0 8px var(--accent-color);
-}
-
-.modal-content label {
-    display: block;
-    margin-bottom: 8px;
-    color: var(--text-color);
-    font-size: 1.1em;
-}
-
-.modal-content input[type="text"],
-.modal-content select {
+.cyber-input, .cyber-select {
+    background-color: rgba(26, 26, 46, 0.8);
+    border: 1px solid var(--primary-glow);
+    color: var(--text-light);
+    padding: 0.75rem;
     width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    background-color: var(--input-bg);
-    border: 1px solid var(--secondary-accent-color);
-    color: var(--text-color);
-    border-radius: 5px;
-    font-family: 'Roboto Mono', monospace;
-    font-size: 1em;
+    transition: all 0.3s ease;
 }
-
-.modal-content input[type="text"]:focus,
-.modal-content select:focus {
+.cyber-input:focus, .cyber-select:focus {
     outline: none;
-    box-shadow: 0 0 8px var(--secondary-accent-color);
+    box-shadow: 0 0 10px var(--primary-glow);
+    border-color: var(--primary-glow);
 }
 
-.modal-content button[type="submit"] {
-    width: 100%;
-    margin-top: 15px;
+.cyber-input[readonly] {
+    background-color: rgba(26, 26, 46, 0.4);
+    cursor: not-allowed;
 }
 
-.summary-button {
-    display: block;
-    margin: 30px auto 0 auto;
-    width: fit-content;
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
 }
-
-#summaryContent {
-    padding: 15px;
-    border: 1px dashed var(--accent-color);
-    border-radius: 5px;
-    background-color: rgba(0, 240, 255, 0.05);
+::-webkit-scrollbar-track {
+    background: var(--surface-dark);
 }
-
-#summaryContent p {
-    margin-bottom: 10px;
-    font-size: 1.1em;
+::-webkit-scrollbar-thumb {
+    background: var(--primary-glow);
 }
-
-#summaryContent strong {
-    color: var(--accent-color);
-}
-
-/* Hide utility class */
-.hidden {
-    display: none;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    h1 {
-        font-size: 1.8em;
-    }
-
-    .neon-button {
-        padding: 8px 15px;
-        font-size: 0.9em;
-    }
-
-    main {
-        grid-template-columns: 1fr;
-    }
-
-    .team-section, .match-history-section {
-        padding: 15px;
-    }
-
-    .team-name {
-        font-size: 1.5em;
-    }
-
-    .player-list li {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .player-list input[type="text"] {
-        margin-right: 0;
-        margin-bottom: 5px;
-        width: calc(100% - 16px); /* Adjust for padding */
-    }
-
-    .modal-content {
-        padding: 20px;
-    }
+::-webkit-scrollbar-thumb:hover {
+    background: #00b4bd;
 }
