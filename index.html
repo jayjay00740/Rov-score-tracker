@@ -605,7 +605,7 @@
                 championViewLanding.innerHTML = content;
                 championViewMain.classList.remove('hidden');
                 championViewLanding.classList.remove('hidden');
-                scoreboard.classList.add('hidden');
+                scoreboard.classList.remove('hidden'); // Keep scoreboard visible
                 landingContent.classList.add('hidden');
             } else {
                 championViewMain.classList.add('hidden');
@@ -648,7 +648,9 @@
         async function recalculateAndSyncTrophies() {
             const trophyCounts = {};
             historyData.forEach(record => {
-                trophyCounts[record.winner] = (trophyCounts[record.winner] || 0) + 1;
+                if (record.winner !== "เสมอ") {
+                    trophyCounts[record.winner] = (trophyCounts[record.winner] || 0) + 1;
+                }
             });
 
             const batch = writeBatch(db);
@@ -941,29 +943,46 @@
                 return;
             }
 
-            let winningTeamName;
-            let overallMvpName;
+            let finalWinnerName;
+            let finalMvpName;
 
             if (scores.length > 1 && scores[0].score === scores[1].score) {
-                // It's a draw
-                winningTeamName = "เสมอ";
+                // Draw condition
+                finalWinnerName = "เสมอ";
                 const allMembers = teamsData.flatMap(team => team.members);
-                allMembers.sort((a, b) => (b.mvpCount || 0) - (a.mvpCount || 0));
-                overallMvpName = allMembers[0].name;
+                if (allMembers.length > 0) {
+                    allMembers.sort((a, b) => (b.mvpCount || 0) - (a.mvpCount || 0));
+                    finalMvpName = allMembers[0].name;
+                } else {
+                    finalMvpName = "N/A";
+                }
             } else {
-                // There is a clear winner
+                // Clear winner condition
                 const winningTeam = scores[0];
-                winningTeamName = winningTeam.name;
-                winningTeam.members.sort((a, b) => (b.mvpCount || 0) - (a.mvpCount || 0));
-                overallMvpName = winningTeam.members[0].name;
+                finalWinnerName = winningTeam.name;
+                if (winningTeam.members && winningTeam.members.length > 0) {
+                    winningTeam.members.sort((a, b) => (b.mvpCount || 0) - (a.mvpCount || 0));
+                    finalMvpName = winningTeam.members[0].name;
+                } else {
+                    finalMvpName = "N/A";
+                }
             }
 
             const batch = writeBatch(db);
             const statusRef = doc(db, "competition", "status");
-            batch.set(statusRef, { isSummarized: true, winnerTeamName, overallMvpName, month: competitionStatus.month });
+            batch.set(statusRef, { 
+                isSummarized: true, 
+                winnerTeamName: finalWinnerName, 
+                overallMvpName: finalMvpName, 
+                month: competitionStatus.month 
+            });
 
             const historyRef = doc(collection(db, "history"));
-            batch.set(historyRef, { month: competitionStatus.month, winner: winningTeamName, mvp: overallMvpName });
+            batch.set(historyRef, { 
+                month: competitionStatus.month, 
+                winner: finalWinnerName, 
+                mvp: finalMvpName 
+            });
             
             try {
                 await batch.commit();
