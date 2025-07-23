@@ -402,10 +402,31 @@
     </div>
 
     <script type="module">
-        // --- Firebase Imports ---
+        // --- Firebase Imports (v9 Modular SDK) ---
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, onSnapshot, addDoc, query, getDocs, writeBatch, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { 
+            getAuth, 
+            createUserWithEmailAndPassword, 
+            signInWithEmailAndPassword, 
+            signOut, 
+            onAuthStateChanged, 
+            setPersistence, 
+            browserLocalPersistence 
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { 
+            getFirestore, 
+            doc, 
+            getDoc, 
+            setDoc, 
+            updateDoc, 
+            collection, 
+            onSnapshot, 
+            addDoc, 
+            query, 
+            getDocs, 
+            writeBatch, 
+            deleteDoc 
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // --- Firebase Config ---
         const firebaseConfig = {
@@ -496,27 +517,31 @@
 
         // --- Data Handling & Rendering ---
         function initializeDataListeners() {
-            onSnapshot(collection(db, "teams"), (snapshot) => {
+            const teamsCollection = collection(db, "teams");
+            onSnapshot(teamsCollection, (snapshot) => {
                 teamsData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 renderScoreboard();
                 renderAdminTeamsList();
                 checkAllDataLoaded('teams');
             });
 
-            onSnapshot(collection(db, "matches"), (snapshot) => {
+            const matchesCollection = collection(db, "matches");
+            onSnapshot(matchesCollection, (snapshot) => {
                 matchesData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 matchesData.sort((a, b) => new Date(b.date) - new Date(a.date));
                 renderLatestMatch();
                 checkAllDataLoaded('matches');
             });
 
-            onSnapshot(collection(db, "history"), (snapshot) => {
+            const historyCollection = collection(db, "history");
+            onSnapshot(historyCollection, (snapshot) => {
                 historyData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 recalculateAndSyncTrophies();
                 checkAllDataLoaded('history');
             });
 
-            onSnapshot(doc(db, "competition", "status"), (doc) => {
+            const statusDoc = doc(db, "competition", "status");
+            onSnapshot(statusDoc, (doc) => {
                 competitionStatus = doc.data() || {};
                 renderCompetitionInfo();
                 renderChampionView();
@@ -699,7 +724,8 @@
                 const resetMembers = team.members.map(m => ({ ...m, mvpCount: 0 }));
                 batch.update(teamRef, { score: 0, members: resetMembers });
             });
-            const matchesSnapshot = await getDocs(collection(db, "matches"));
+            const matchesCollection = collection(db, "matches");
+            const matchesSnapshot = await getDocs(matchesCollection);
             matchesSnapshot.forEach(doc => batch.delete(doc.ref));
             const statusRef = doc(db, "competition", "status");
             const newMonth = new Date().toLocaleString('th-TH', { month: 'long', year: 'numeric' });
@@ -738,7 +764,6 @@
             }
 
             const batch = writeBatch(db);
-
             const teamRef = doc(db, "teams", winnerTeam.id);
             const newScore = (winnerTeam.score || 1) - 1;
             const updatedMembers = winnerTeam.members.map(member => {
@@ -794,7 +819,8 @@
             };
             
             try {
-                await addDoc(collection(db, "teams"), newTeam);
+                const teamsCollection = collection(db, "teams");
+                await addDoc(teamsCollection, newTeam);
                 showAlert('สำเร็จ', `เพิ่มทีม "${teamName}" เรียบร้อยแล้ว`);
                 newTeamNameInput.value = '';
                 newTeamLogoInput.value = '';
@@ -811,7 +837,8 @@
                 `คุณแน่ใจหรือไม่ที่จะลบทีม "${team.name}"? ข้อมูลทั้งหมดของทีมนี้จะถูกลบถาวร`,
                 async () => {
                     try {
-                        await deleteDoc(doc(db, "teams", teamId));
+                        const teamDoc = doc(db, "teams", teamId);
+                        await deleteDoc(teamDoc);
                         showAlert('สำเร็จ', `ลบทีม "${team.name}" เรียบร้อยแล้ว`);
                     } catch (error) {
                         console.error("Error deleting team:", error);
@@ -954,7 +981,8 @@
             const winnerTeam = teamsData.find(t => t.id === winnerTeamId);
             try {
                 const batch = writeBatch(db);
-                const newMatchRef = doc(collection(db, "matches"));
+                const matchesCollection = collection(db, "matches");
+                const newMatchRef = doc(matchesCollection);
                 batch.set(newMatchRef, { 
                     date, 
                     winnerTeamId, 
@@ -1059,8 +1087,11 @@
             const batch = writeBatch(db);
             const statusRef = doc(db, "competition", "status");
             batch.set(statusRef, { isSummarized: true, winnerTeamName: finalWinnerName, overallMvpName: finalMvpName, overallMvpCount: finalMvpCount, month: competitionStatus.month });
-            const historyRef = doc(collection(db, "history"));
+            
+            const historyCollection = collection(db, "history");
+            const historyRef = doc(historyCollection);
             batch.set(historyRef, { month: competitionStatus.month, winner: finalWinnerName, mvp: finalMvpName, mvpCount: finalMvpCount, timestamp: new Date() });
+            
             try {
                 await batch.commit();
                 showAlert('สำเร็จ', 'สรุปผลการแข่งขันเรียบร้อยแล้ว');
@@ -1189,7 +1220,8 @@
             if (historyData.some(record => record.month === monthString)) { showAlert('ข้อมูลซ้ำ', `มีประวัติของเดือน ${monthString} อยู่แล้ว`); return; }
             try {
                 const historyTimestamp = new Date(parseInt(year), parseInt(monthIndex), 1);
-                await addDoc(collection(db, "history"), { month: monthString, winner, mvp, mvpCount: parseInt(mvpCount), timestamp: historyTimestamp });
+                const historyCollection = collection(db, "history");
+                await addDoc(historyCollection, { month: monthString, winner, mvp, mvpCount: parseInt(mvpCount), timestamp: historyTimestamp });
                 showAlert('สำเร็จ', 'บันทึกประวัติย้อนหลังเรียบร้อยแล้ว');
                 closeModal('record-history-modal');
                 document.getElementById('record-history-form').reset();
@@ -1204,7 +1236,8 @@
             const mvp = document.getElementById('history-mvp-player').value;
             const mvpCount = document.getElementById('edit-history-mvp-count').value;
             try {
-                await updateDoc(doc(db, "history", historyId), { winner, mvp, mvpCount: parseInt(mvpCount) });
+                const historyDoc = doc(db, "history", historyId);
+                await updateDoc(historyDoc, { winner, mvp, mvpCount: parseInt(mvpCount) });
                 showAlert('สำเร็จ', 'แก้ไขประวัติเรียบร้อยแล้ว');
                 closeModal('edit-history-modal');
             } catch (error) {
@@ -1217,7 +1250,8 @@
             const record = historyData.find(h => h.id === historyId);
             showConfirm('ยืนยันการลบ', `คุณแน่ใจหรือไม่ที่จะลบประวัติของเดือน "${record.month}"?`, async () => {
                 try {
-                    await deleteDoc(doc(db, "history", historyId));
+                    const historyDoc = doc(db, "history", historyId);
+                    await deleteDoc(historyDoc);
                     showAlert('สำเร็จ', 'ลบประวัติเรียบร้อยแล้ว');
                 } catch (error) {
                     console.error("Error deleting history:", error);
@@ -1294,8 +1328,9 @@
         }
 
         async function checkAndSeedData() {
-            const teamsQuery = query(collection(db, "teams"));
-            const teamsSnapshot = await getDocs(teamsQuery);
+            const teamsCollection = collection(db, "teams");
+            const q = query(teamsCollection);
+            const teamsSnapshot = await getDocs(q);
             if (teamsSnapshot.empty && currentUser) {
                 console.log("No teams found and admin is logged in. Seeding initial data...");
                 await seedInitialData();
@@ -1308,8 +1343,9 @@
                 { name: "หมูเด้งFC", logoUrl: "", score: 0, trophyCount: 0, members: [ { name: "ผู้เล่น 1", mvpCount: 0 }, { name: "ผู้เล่น 2", mvpCount: 0 }, { name: "ผู้เล่น 3", mvpCount: 0 }, { name: "ผู้เล่น 4", mvpCount: 0 }, { name: "ผู้เล่น 5", mvpCount: 0 }, { name: "สำรอง 1", mvpCount: 0 }, { name: "สำรอง 2", mvpCount: 0 } ] },
                 { name: "ยุ้ยอ้วน United", logoUrl: "", score: 0, trophyCount: 0, members: [ { name: "ผู้เล่น A", mvpCount: 0 }, { name: "ผู้เล่น B", mvpCount: 0 }, { name: "ผู้เล่น C", mvpCount: 0 }, { name: "ผู้เล่น D", mvpCount: 0 }, { name: "ผู้เล่น E", mvpCount: 0 }, { name: "สำรอง X", mvpCount: 0 }, { name: "สำรอง Y", mvpCount: 0 } ] }
             ];
+            const teamsCollection = collection(db, "teams");
             initialTeams.forEach(team => {
-                const newTeamRef = doc(collection(db, "teams"));
+                const newTeamRef = doc(teamsCollection);
                 batch.set(newTeamRef, team);
             });
             const statusRef = doc(db, "competition", "status");
