@@ -461,6 +461,15 @@
         let listenersInitialized = false;
         let calendarState = { year: new Date().getFullYear(), month: new Date().getMonth() };
         
+        // --- UI Elements ---
+        const loadingView = document.getElementById('loading-view');
+        const landingView = document.getElementById('landing-view');
+        const mainView = document.getElementById('main-view');
+        const loginModal = document.getElementById('login-modal');
+        const adminControls = document.getElementById('admin-controls');
+        const guestControls = document.getElementById('guest-controls');
+        const scoreboard = document.getElementById('scoreboard');
+        
         // --- Initial Load ---
         document.addEventListener('DOMContentLoaded', () => {
             setupAuthListener();
@@ -915,7 +924,8 @@
             });
 
             form.onsubmit = (e) => { e.preventDefault(); handleSaveTeam(teamId); };
-            modal.classList.remove('hidden'); modal.classList.add('flex');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
         }
         
         async function handleSaveTeam(teamId) {
@@ -967,7 +977,8 @@
                 }
             };
             form.onsubmit = handleSaveMatch;
-            modal.classList.remove('hidden'); modal.classList.add('flex');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
             renderCalendar(calendarState.year, calendarState.month);
         }
 
@@ -1357,5 +1368,6 @@
             }
         }
     </script>
+
 </body>
 </html>
