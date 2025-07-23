@@ -175,13 +175,11 @@
 <body class="min-h-screen w-full p-4 md:p-8 flex items-center justify-center">
 
     <div id="app-container" class="w-full max-w-6xl mx-auto">
-        <!-- Loading View -->
         <div id="loading-view" class="flex flex-col items-center justify-center h-64">
             <div class="loader"></div>
             <p class="mt-4 text-xl text-primary-color">กำลังโหลดข้อมูล...</p>
         </div>
 
-        <!-- Landing View -->
         <div id="landing-view" class="hidden text-center">
              <div class="flex flex-col justify-center min-h-[80vh]">
                 <h1 class="text-4xl md:text-6xl mb-4 glitch" data-text="ROV AUDIT LEAGUE">ROV AUDIT LEAGUE</h1>
@@ -196,7 +194,6 @@
             </div>
         </div>
 
-        <!-- Main Content View (Scoreboard etc.) -->
         <div id="main-view" class="hidden">
             <div class="flex flex-col justify-center min-h-[80vh]">
                 <header class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
@@ -231,17 +228,16 @@
         </div>
     </div>
 
-    <!-- Modals -->
     <div id="login-modal" class="fixed inset-0 z-50 hidden items-center justify-center modal-backdrop">
         <div class="cyber-panel p-8 w-11/12 max-w-sm text-center relative">
             <button id="close-login-modal-btn" class="absolute top-2 right-4 text-2xl text-primary-color hover:text-accent-color">&times;</button>
             <h2 class="text-2xl mb-6">ผู้ดูแลระบบ</h2>
-            <div id="login-form" class="space-y-4">
-                <input id="username" type="text" placeholder="Username" class="w-full cyber-input">
+            <form id="login-form" class="space-y-4">
+                <input id="email" type="email" placeholder="Email" class="w-full cyber-input">
                 <input id="password" type="password" placeholder="Password" class="w-full cyber-input">
-                <button id="login-btn" class="w-full cyber-button">Login</button>
+                <button type="submit" id="login-btn" class="w-full cyber-button">Login</button>
                 <p id="login-error" class="text-red-500 h-4"></p>
-            </div>
+            </form>
         </div>
     </div>
 
@@ -251,8 +247,7 @@
             <div class="mb-6">
                 <h3 class="text-xl text-primary-color mb-2">รายชื่อทีมปัจจุบัน</h3>
                 <div id="teams-list-admin" class="space-y-2 max-h-48 overflow-y-auto pr-2">
-                    <!-- Team list will be rendered here -->
-                </div>
+                    </div>
             </div>
             <div class="mb-4 pt-4 border-t border-primary-color/30">
                 <h3 class="text-xl text-primary-color mb-2">เพิ่มทีมใหม่</h3>
@@ -469,35 +464,34 @@
             });
         }
 
-        function handleLogin() {
-            const username = document.getElementById('username').value;
+        function handleLogin(e) {
+            e.preventDefault(); // Prevent form from submitting the traditional way
+            const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const loginError = document.getElementById('login-error');
             loginError.textContent = '';
 
-            if (username !== 'admin1234' || password !== '1234567j') {
-                loginError.textContent = 'Invalid username or password.';
-                return;
-            }
-            
-            const adminEmail = 'admin@rovleague.com'; 
-            
-            signInWithEmailAndPassword(auth, adminEmail, password)
+            // Send email and password directly to Firebase for verification
+            signInWithEmailAndPassword(auth, email, password)
                 .then(() => {
                     closeModal('login-modal');
+                    document.getElementById('login-form').reset(); // Clear form on successful login
                 })
                 .catch((signInError) => {
+                    // If login fails, it might be a new admin user.
+                    // Try to create a new user with the same credentials.
                     if (signInError.code === 'auth/user-not-found' || signInError.code === 'auth/invalid-credential') {
-                        createUserWithEmailAndPassword(auth, adminEmail, password)
+                        createUserWithEmailAndPassword(auth, email, password)
                             .then(() => {
                                 closeModal('login-modal');
+                                document.getElementById('login-form').reset(); // Clear form on successful creation
                             })
                             .catch((createError) => {
                                 loginError.textContent = 'Login/Creation failed. Check credentials.';
                                 console.error("Admin Creation Error:", createError);
                             });
                     } else {
-                        loginError.textContent = `Login failed: ${signInError.message}`;
+                        loginError.textContent = `Login failed: Invalid credentials.`;
                         console.error("Login error:", signInError);
                     }
                 });
@@ -1016,6 +1010,7 @@
             const listEl = document.getElementById('history-list');
             listEl.innerHTML = '';
             if (historyData.length > 0) {
+                historyData.sort((a, b) => new Date(b.month) - new Date(a.month)); // Sort for display
                 historyData.forEach(record => {
                     const mvpCountText = record.mvpCount ? ` (MVP: ${record.mvpCount})` : '';
                     const recordDiv = document.createElement('div');
@@ -1241,7 +1236,7 @@
 
         // --- Event Listeners Setup ---
         function setupEventListeners() {
-            document.getElementById('login-btn').addEventListener('click', handleLogin);
+            document.getElementById('login-form').addEventListener('submit', handleLogin);
             document.getElementById('logout-btn').addEventListener('click', handleLogout);
             document.getElementById('show-login-btn').addEventListener('click', () => {
                 loginModal.classList.remove('hidden');
