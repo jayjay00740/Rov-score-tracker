@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* --- Custom Styles for Cyberpunk Theme --- */
         :root {
             --primary-color: #00ffff; /* Cyan */
             --secondary-color: #ff00ff; /* Magenta */
@@ -18,7 +17,6 @@
             --text-color: #e0e0e0;
             --border-color: rgba(0, 255, 255, 0.3);
         }
-
         body {
             font-family: 'Rajdhani', sans-serif;
             background-color: var(--bg-color);
@@ -28,12 +26,10 @@
                 linear-gradient(to right, var(--border-color) 1px, var(--bg-color) 1px);
             background-size: 20px 20px;
         }
-
         h1, h2, h3 {
             font-family: 'Orbitron', sans-serif;
             text-shadow: 0 0 5px var(--primary-color), 0 0 10px var(--primary-color);
         }
-        
         .cyber-panel {
             background-color: rgba(10, 25, 47, 0.8);
             border: 1px solid var(--primary-color);
@@ -42,7 +38,6 @@
             -webkit-backdrop-filter: blur(5px);
             clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
         }
-
         .champion-panel {
             border: 1px solid var(--accent-color);
             box-shadow: 0 0 25px var(--accent-color), inset 0 0 15px var(--accent-color);
@@ -53,8 +48,6 @@
             50% { box-shadow: 0 0 35px var(--accent-color), inset 0 0 20px var(--accent-color); }
             100% { box-shadow: 0 0 25px var(--accent-color), inset 0 0 15px var(--accent-color); }
         }
-
-
         .cyber-button {
             font-family: 'Orbitron', sans-serif;
             background-color: transparent;
@@ -67,13 +60,11 @@
             overflow: hidden;
             box-shadow: 0 0 5px var(--primary-color), inset 0 0 5px var(--primary-color);
         }
-        
         .cyber-button:hover {
             background-color: var(--primary-color);
             color: var(--bg-color);
             box-shadow: 0 0 20px var(--primary-color);
         }
-
         .cyber-button.secondary {
             border-color: var(--secondary-color);
             color: var(--secondary-color);
@@ -93,7 +84,6 @@
             color: var(--bg-color);
             box-shadow: 0 0 20px #ff4d4d;
         }
-
         .cyber-input {
             background-color: rgba(0, 0, 0, 0.5);
             border: 1px solid var(--primary-color);
@@ -102,18 +92,15 @@
             outline: none;
             transition: all 0.3s ease;
         }
-
         .cyber-input:focus {
             box-shadow: 0 0 10px var(--primary-color);
             border-color: var(--accent-color);
         }
-
         .modal-backdrop {
             background-color: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
         }
-
         .glitch {
             position: relative;
             animation: glitch-skew 1s infinite linear alternate-reverse;
@@ -137,11 +124,9 @@
             text-shadow: -2px 0 var(--primary-color), 2px 2px var(--secondary-color);
             animation: glitch-anim2 1s infinite linear alternate-reverse;
         }
-
         @keyframes glitch-anim { 100% { clip: rect(92px, 9999px, 98px, 0); transform: skew(0.51deg); } }
         @keyframes glitch-anim2 { 100% { clip: rect(1px, 9999px, 92px, 0); transform: skew(0.24deg); } }
         @keyframes glitch-skew { 100% { transform: skew(1deg); } }
-        
         .loader {
             width: 50px;
             aspect-ratio: 1;
@@ -151,8 +136,6 @@
             animation: l2 1s infinite linear;
         }
         @keyframes l2 {to{transform: rotate(1turn)}}
-        
-        /* Calendar Styles */
         .calendar { border: 1px solid var(--primary-color); background-color: rgba(0,0,0,0.7); backdrop-filter: blur(3px); }
         .calendar-header { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background-color: rgba(0, 255, 255, 0.1); }
         .calendar-nav { cursor: pointer; padding: 0.25rem 0.75rem; transition: all 0.2s; }
@@ -164,8 +147,6 @@
         .calendar-day.date:hover { background-color: var(--primary-color); color: var(--bg-color); }
         .calendar-day.empty { opacity: 0.3; }
         .calendar-day.selected { background-color: var(--accent-color); color: var(--bg-color); text-shadow: none; }
-
-
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: var(--bg-color); }
         ::-webkit-scrollbar-thumb { background: var(--primary-color); }
@@ -233,8 +214,8 @@
             <button id="close-login-modal-btn" class="absolute top-2 right-4 text-2xl text-primary-color hover:text-accent-color">&times;</button>
             <h2 class="text-2xl mb-6">ผู้ดูแลระบบ</h2>
             <form id="login-form" class="space-y-4">
-                <input id="email" type="email" placeholder="Email" class="w-full cyber-input">
-                <input id="password" type="password" placeholder="Password" class="w-full cyber-input">
+                <input id="email" type="email" placeholder="Email" class="w-full cyber-input" autocomplete="email" required>
+                <input id="password" type="password" placeholder="Password" class="w-full cyber-input" autocomplete="current-password" required>
                 <button type="submit" id="login-btn" class="w-full cyber-button">Login</button>
                 <p id="login-error" class="text-red-500 h-4"></p>
             </form>
@@ -247,7 +228,7 @@
             <div class="mb-6">
                 <h3 class="text-xl text-primary-color mb-2">รายชื่อทีมปัจจุบัน</h3>
                 <div id="teams-list-admin" class="space-y-2 max-h-48 overflow-y-auto pr-2">
-                    </div>
+                </div>
             </div>
             <div class="mb-4 pt-4 border-t border-primary-color/30">
                 <h3 class="text-xl text-primary-color mb-2">เพิ่มทีมใหม่</h3>
@@ -400,7 +381,7 @@
         // --- Firebase Imports ---
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, onSnapshot, addDoc, query, getDocs, writeBatch, deleteDoc, where } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, onSnapshot, addDoc, query, getDocs, writeBatch, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // --- Firebase Config ---
         const firebaseConfig = {
@@ -465,33 +446,30 @@
         }
 
         function handleLogin(e) {
-            e.preventDefault(); // Prevent form from submitting the traditional way
+            e.preventDefault();
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const loginError = document.getElementById('login-error');
             loginError.textContent = '';
 
-            // Send email and password directly to Firebase for verification
             signInWithEmailAndPassword(auth, email, password)
                 .then(() => {
                     closeModal('login-modal');
-                    document.getElementById('login-form').reset(); // Clear form on successful login
+                    document.getElementById('login-form').reset();
                 })
                 .catch((signInError) => {
-                    // If login fails, it might be a new admin user.
-                    // Try to create a new user with the same credentials.
                     if (signInError.code === 'auth/user-not-found' || signInError.code === 'auth/invalid-credential') {
                         createUserWithEmailAndPassword(auth, email, password)
                             .then(() => {
                                 closeModal('login-modal');
-                                document.getElementById('login-form').reset(); // Clear form on successful creation
+                                document.getElementById('login-form').reset();
                             })
                             .catch((createError) => {
                                 loginError.textContent = 'Login/Creation failed. Check credentials.';
                                 console.error("Admin Creation Error:", createError);
                             });
                     } else {
-                        loginError.textContent = `Login failed: Invalid credentials.`;
+                        loginError.textContent = 'Login failed: Invalid credentials.';
                         console.error("Login error:", signInError);
                     }
                 });
@@ -519,7 +497,7 @@
 
             onSnapshot(collection(db, "history"), (snapshot) => {
                 historyData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                recalculateAndSyncTrophies(); // Recalculate trophies whenever history changes
+                recalculateAndSyncTrophies();
                 checkAllDataLoaded('history');
             });
 
@@ -612,7 +590,7 @@
                 championViewLanding.innerHTML = content;
                 championViewMain.classList.remove('hidden');
                 championViewLanding.classList.remove('hidden');
-                scoreboard.classList.remove('hidden'); // Keep scoreboard visible
+                scoreboard.classList.remove('hidden');
                 landingContent.classList.add('hidden');
             } else {
                 championViewMain.classList.add('hidden');
@@ -887,7 +865,6 @@
             }
         }
         
-        // --- Calendar Logic ---
         function renderCalendar(year, month) {
             const container = document.getElementById('calendar-container');
             const dateInput = document.getElementById('match-date');
@@ -955,7 +932,6 @@
             let finalMvpCount = 0;
 
             if (scores.length > 1 && scores[0].score === scores[1].score) {
-                // Draw condition
                 finalWinnerName = "เสมอ";
                 const allMembers = teamsData.flatMap(team => team.members);
                 if (allMembers.length > 0) {
@@ -966,7 +942,6 @@
                     finalMvpName = "N/A";
                 }
             } else {
-                // Clear winner condition
                 const winningTeam = scores[0];
                 finalWinnerName = winningTeam.name;
                 if (winningTeam.members && winningTeam.members.length > 0) {
@@ -993,7 +968,8 @@
                 month: competitionStatus.month, 
                 winner: finalWinnerName, 
                 mvp: finalMvpName,
-                mvpCount: finalMvpCount
+                mvpCount: finalMvpCount,
+                timestamp: new Date() // <-- IMPROVEMENT 1: Added timestamp
             });
             
             try {
@@ -1009,9 +985,16 @@
             const modal = document.getElementById('history-modal');
             const listEl = document.getElementById('history-list');
             listEl.innerHTML = '';
-            if (historyData.length > 0) {
-                historyData.sort((a, b) => new Date(b.month) - new Date(a.month)); // Sort for display
-                historyData.forEach(record => {
+            
+            // IMPROVEMENT 1: Sort by the reliable timestamp field
+            const sortedHistory = [...historyData].sort((a, b) => {
+                const dateA = a.timestamp?.toDate ? a.timestamp.toDate() : new Date(0);
+                const dateB = b.timestamp?.toDate ? b.timestamp.toDate() : new Date(0);
+                return dateB - dateA;
+            });
+
+            if (sortedHistory.length > 0) {
+                sortedHistory.forEach(record => {
                     const mvpCountText = record.mvpCount ? ` (MVP: ${record.mvpCount})` : '';
                     const recordDiv = document.createElement('div');
                     recordDiv.className = 'p-2 bg-gray-900/50 border-l-2 border-accent-color flex justify-between items-center';
@@ -1093,7 +1076,6 @@
             const winnerSelect = document.getElementById('history-record-winner');
             const mvpSelect = document.getElementById('history-record-mvp');
 
-            // Populate years
             yearSelect.innerHTML = '';
             const currentYear = new Date().getFullYear();
             for (let i = 0; i < 5; i++) {
@@ -1101,14 +1083,12 @@
                 yearSelect.innerHTML += `<option value="${year}">${year + 543}</option>`;
             }
 
-            // Populate months
             monthSelect.innerHTML = '';
             const thaiMonths = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
             thaiMonths.forEach((month, index) => {
                 monthSelect.innerHTML += `<option value="${index}">${month}</option>`;
             });
 
-            // Populate teams
             winnerSelect.innerHTML = '';
             teamsData.forEach(team => {
                 winnerSelect.innerHTML += `<option value="${team.name}">${team.name}</option>`;
@@ -1144,14 +1124,21 @@
             const thaiMonths = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
             const monthString = `${thaiMonths[monthIndex]} ${parseInt(year) + 543}`;
 
-            // Check for duplicates
             if (historyData.some(record => record.month === monthString)) {
                 showAlert('ข้อมูลซ้ำ', `มีประวัติของเดือน ${monthString} อยู่แล้ว`);
                 return;
             }
 
             try {
-                await addDoc(collection(db, "history"), { month: monthString, winner, mvp, mvpCount: parseInt(mvpCount) });
+                // IMPROVEMENT 1: Added timestamp for historical record
+                const historyTimestamp = new Date(parseInt(year), parseInt(monthIndex), 1);
+                await addDoc(collection(db, "history"), { 
+                    month: monthString, 
+                    winner, 
+                    mvp, 
+                    mvpCount: parseInt(mvpCount),
+                    timestamp: historyTimestamp
+                });
                 showAlert('สำเร็จ', 'บันทึกประวัติย้อนหลังเรียบร้อยแล้ว');
                 closeModal('record-history-modal');
             } catch (error) {
@@ -1234,7 +1221,6 @@
             }
         }
 
-        // --- Event Listeners Setup ---
         function setupEventListeners() {
             document.getElementById('login-form').addEventListener('submit', handleLogin);
             document.getElementById('logout-btn').addEventListener('click', handleLogout);
@@ -1269,46 +1255,43 @@
                 document.getElementById('calendar-container').classList.toggle('hidden');
             });
 
-            // History buttons
             document.getElementById('show-history-btn-admin').addEventListener('click', showHistoryModal);
             document.getElementById('show-history-btn-guest').addEventListener('click', showHistoryModal);
             document.getElementById('close-history-modal-btn').addEventListener('click', () => closeModal('history-modal'));
             document.getElementById('close-edit-history-modal-btn').addEventListener('click', () => closeModal('edit-history-modal'));
             
-            // Alert modal close button
             document.getElementById('close-alert-modal-btn').addEventListener('click', () => closeModal('alert-modal'));
         }
 
         // --- Data Seeding ---
         async function checkAndSeedData() {
-            await seedInitialData(false);
+            const teamsQuery = query(collection(db, "teams"));
+            const teamsSnapshot = await getDocs(teamsQuery);
+            // IMPROVEMENT 2: Only seed if the database is empty AND an admin is logged in.
+            if (teamsSnapshot.empty && currentUser) {
+                console.log("No teams found and admin is logged in. Seeding initial data...");
+                await seedInitialData();
+            }
         }
 
-        async function seedInitialData(force = false) {
+        async function seedInitialData() {
+            const batch = writeBatch(db);
+            const initialTeams = [
+                { name: "หมูเด้งFC", score: 0, trophyCount: 0, members: [ { name: "ผู้เล่น 1", mvpCount: 0 }, { name: "ผู้เล่น 2", mvpCount: 0 }, { name: "ผู้เล่น 3", mvpCount: 0 }, { name: "ผู้เล่น 4", mvpCount: 0 }, { name: "ผู้เล่น 5", mvpCount: 0 }, { name: "สำรอง 1", mvpCount: 0 }, { name: "สำรอง 2", mvpCount: 0 } ] },
+                { name: "ยุ้ยอ้วน United", score: 0, trophyCount: 0, members: [ { name: "ผู้เล่น A", mvpCount: 0 }, { name: "ผู้เล่น B", mvpCount: 0 }, { name: "ผู้เล่น C", mvpCount: 0 }, { name: "ผู้เล่น D", mvpCount: 0 }, { name: "ผู้เล่น E", mvpCount: 0 }, { name: "สำรอง X", mvpCount: 0 }, { name: "สำรอง Y", mvpCount: 0 } ] }
+            ];
+            initialTeams.forEach(team => {
+                const newTeamRef = doc(collection(db, "teams"));
+                batch.set(newTeamRef, team);
+            });
             const statusRef = doc(db, "competition", "status");
+            batch.set(statusRef, { isSummarized: false, month: new Date().toLocaleString('th-TH', { month: 'long', year: 'numeric' }) });
+            
             try {
-                const statusSnap = await getDoc(statusRef);
-                if (force || !statusSnap.exists()) {
-                    if (!currentUser && !force) {
-                        console.log("Seeding requires admin to be logged in.");
-                        return;
-                    }
-                    console.log("Seeding initial data...");
-                    const batch = writeBatch(db);
-                    const initialTeams = [
-                        { name: "หมูเด้งFC", score: 0, trophyCount: 0, members: [ { name: "ผู้เล่น 1", mvpCount: 0 }, { name: "ผู้เล่น 2", mvpCount: 0 }, { name: "ผู้เล่น 3", mvpCount: 0 }, { name: "ผู้เล่น 4", mvpCount: 0 }, { name: "ผู้เล่น 5", mvpCount: 0 }, { name: "สำรอง 1", mvpCount: 0 }, { name: "สำรอง 2", mvpCount: 0 } ] },
-                        { name: "ยุ้ยอ้วน United", score: 0, trophyCount: 0, members: [ { name: "ผู้เล่น A", mvpCount: 0 }, { name: "ผู้เล่น B", mvpCount: 0 }, { name: "ผู้เล่น C", mvpCount: 0 }, { name: "ผู้เล่น D", mvpCount: 0 }, { name: "ผู้เล่น E", mvpCount: 0 }, { name: "สำรอง X", mvpCount: 0 }, { name: "สำรอง Y", mvpCount: 0 } ] }
-                    ];
-                    initialTeams.forEach(team => {
-                        const newTeamRef = doc(collection(db, "teams"));
-                        batch.set(newTeamRef, team);
-                    });
-                    batch.set(statusRef, { isSummarized: false, month: new Date().toLocaleString('th-TH', { month: 'long', year: 'numeric' }) });
-                    await batch.commit();
-                    console.log("Initial data seeded.");
-                }
-            } catch (error) {
-                console.error("Error checking or seeding data:", error);
+                await batch.commit();
+                console.log("Initial data seeded successfully.");
+            } catch(error) {
+                console.error("Error seeding data: ", error);
             }
         }
     </script>
