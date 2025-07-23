@@ -34,7 +34,7 @@
 ---
 
 ## 👨‍💻 ผู้พัฒนา
-
+Email : wivat.pp@gmail.com
 - **jayjay00740**  
 GitHub: [github.com/jayjay00740](https://github.com/jayjay00740)
 
